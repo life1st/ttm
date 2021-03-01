@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const autoprefixer = require('autoprefixer')
+const HtmlPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin: CleanPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const isDev = process.env.NODE_ENV === 'dev'
@@ -16,7 +17,7 @@ module.exports = {
   output: {
     filename: isDev ? '[name].bundle.js' : '[name].[hash:6].js',
     chunkFilename: isDev ? '[name].bundle.js' : '[name].[chunkhash:4].js',
-    path: '/dist',
+    path: path.resolve('./dist'),
     publicPath: '/'
   },
   node: { fs: 'empty' },
@@ -93,6 +94,16 @@ module.exports = {
     !isDev && new CleanPlugin(),
     !isDev && new MiniCssExtractPlugin({
       filename: '[name].bundle.css'
+    }),
+    !isDev && new HtmlPlugin({
+      title: 'torrent to magnet',
+      meta: {
+        charset: 'utf-8',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+      },
+      templateContent: `<div class="root"><input type="text" class="filepond-root" type="file"></div>`,
+      inject: 'body',
+      minify: true
     }),
     isDev && new webpack.HotModuleReplacementPlugin(),
     isDev && new webpack.DefinePlugin({
