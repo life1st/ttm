@@ -35,6 +35,8 @@ jobs:
       shell: bash
     - run: rm -rf ./src
       shell: bash
+    - run: echo "ttm.life1st.me" > CNAME
+      shell: bash
     - run: git add .
       shell: bash
     - run: git config --global user.email "deployer@life1st.me"
