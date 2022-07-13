@@ -8,7 +8,7 @@ const { CleanWebpackPlugin: CleanPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const isDev = process.env.NODE_ENV === 'dev'
 const isLocal = process.env.ENV_LOCAL
-
+// triggle depoly 0713
 module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: {
